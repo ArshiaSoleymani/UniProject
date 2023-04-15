@@ -1,0 +1,21 @@
+﻿  animal.cpp
+C:\Users\Amin\Desktop\uniproject\uniproject\animal.cpp(77,38): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+C:\Users\Amin\Desktop\uniproject\uniproject\animal.cpp(121,40): warning C4244: '=': conversion from 'unsigned __int64' to 'float', possible loss of data
+  genome.cpp
+C:\Users\Amin\Desktop\uniproject\uniproject\genome.cpp(215,66): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Amin\Desktop\uniproject\uniproject\genome.cpp(239,70): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Amin\Desktop\uniproject\uniproject\genome.cpp(240,94): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Amin\Desktop\uniproject\uniproject\genome.cpp(254,71): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Amin\Desktop\uniproject\uniproject\genome.cpp(255,95): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Amin\Desktop\uniproject\uniproject\genome.cpp(278,76): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Amin\Desktop\uniproject\uniproject\genome.cpp(301,80): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Amin\Desktop\uniproject\uniproject\genome.cpp(302,104): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Amin\Desktop\uniproject\uniproject\genome.cpp(314,81): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Amin\Desktop\uniproject\uniproject\genome.cpp(315,105): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Amin\Desktop\uniproject\uniproject\genome.cpp(406,2): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  main.cpp
+  menu_functions.cpp
+C:\Users\Amin\Desktop\uniproject\uniproject\menu_functions.cpp(83,6): warning C4101: 'input': unreferenced local variable
+  Generating Code...
+C:\Users\Amin\Desktop\uniproject\uniproject\genome.cpp(93): warning C4715: 'genome::setDNA': not all control paths return a value
+  uniproject.vcxproj -> C:\Users\Amin\Desktop\uniproject\x64\Debug\uniproject.exe
