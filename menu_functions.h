@@ -32,7 +32,19 @@ public:
 	static void CellDeath(Cell& cell);
 	static void CellAdd(Cell& cell);
 	static void CellRemove(Cell& cell);
+	static void AnimalMenu();
+	static void AnimalGSP(std::vector<animal>& animals);
+	static void AnimalCompireType(const std::vector<animal>& animals);
+	static void AnimalAsexualRepurduction(const std::vector<animal>& animals);
+	static void AnimalSexualRepurduction(const std::vector<animal>& animals);
+	static void AnimalCellDeath(std::vector<animal>& animals);
+	static void AnimalPrint(const std::vector<animal>& animals);
+	static void AnimalAdd(std::vector<animal>& animals);
+	static void AnimalRemove(std::vector<animal>& animals);
+	static void AnimalAddChromosome(std::vector<animal>& animals);
+	static void AnimalReamoveChromosome(std::vector<animal>& animals);
 
-
+	//cin a string and convet it to int
+	static int CinIntInput();
 };
 

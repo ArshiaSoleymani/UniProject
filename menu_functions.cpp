@@ -589,3 +589,632 @@ void menu_functions::CellRemove(Cell& cell) {
 }
 
 
+void menu_functions::AnimalMenu() {
+
+	std::vector<animal>animals;
+	Cell cell;
+	genome gen;
+	bool back = false, suc = false;
+	int animals_count, input;
+
+	system("cls");
+
+	cout << "Enter the number of animals you wanna set :" << endl << endl;
+
+	animals_count = CinIntInput();
+	for (int i = 0; i < animals_count; i++)
+	{
+		input = 0;
+		system("cls");
+		cout << "Animal " << i + 1 << ":" << endl << endl;
+		cout << "Enter the number of chromosomes: " << endl << endl;
+		input = CinIntInput();
+		for (int i = 0; i < input; i++)
+		{
+			cout << "Chromosome " << i + 1 << ":" << endl << endl;
+			SetDNAMenu(gen);
+			cell.PushBackChromosomesV(gen);
+		}
+		animals.push_back(animal(cell));
+		cell = Cell();
+	}
+	while (!back)
+	{
+		system("cls");
+		cout << "Animal Menu" << endl << endl;
+		cout << "1:Calculate genetic similarity percentage" << endl;
+		cout << "2:compire type" << endl;
+		cout << "3:Asexual repurduction" << endl;
+		cout << "4:Sexual repurduction" << endl;
+		cout << "5:Cell death" << endl;
+		cout << "6:Print animals " << endl;
+		cout << "7:Add chromosomes" << endl;
+		cout << "8:Remove chromosomes" << endl;
+		cout << "9:Add animal" << endl;
+		cout << "10:Remove animal" << endl;
+		cout << "0:Back to main menu" << endl << endl << endl << endl;
+
+		input = CinIntInput();
+		string y_or_n;
+		system("cls");
+		switch (input)
+		{
+		case 0:
+
+			system("cls");
+			cout << "if you go back all data will gone " << endl;
+			cout << "are you sure you wanna leave? y-n " << endl;
+			while (true)
+			{
+				cin >> y_or_n;
+				if (y_or_n == "y")
+				{
+					back = true;
+					break;
+				}
+				else if (y_or_n == "n")
+				{
+					break;
+				}
+				else
+				{
+					cout << "choose y:yes or n:no " << endl;
+				}
+			}
+			break;
+		case 1:
+			AnimalGSP(animals);
+			break;
+		case 2:
+			AnimalCompireType(animals);
+			break;
+		case 3:
+			AnimalAsexualRepurduction(animals);
+			break;
+		case 4:
+			AnimalSexualRepurduction(animals);
+			break;
+		case 5:
+			AnimalCellDeath(animals);
+			break;
+		case 6:
+			AnimalPrint(animals);
+			cout << "Press enter to continue" << endl;
+			cin.get();
+			cin.get();
+			break;
+		case 7:
+			AnimalAddChromosome(animals);
+			break;
+		case 8:
+			AnimalReamoveChromosome(animals);
+			break;
+		case 9:
+			AnimalAdd(animals);
+			break;
+		case 10:
+			AnimalRemove(animals);
+			break;
+		default:
+			break;
+		}
+	}
+}
+void menu_functions::AnimalGSP(std::vector<animal>& animals) {
+	if (animals.size() >= 2)
+	{
+		int input;
+		animal* chosed_anim_1 = nullptr, * chosed_anim_2 = nullptr;
+		system("cls");
+
+		AnimalPrint(animals);
+
+		cout << endl << endl << "Chose first animal? " << endl;
+
+
+		while (true)
+		{
+			input = CinIntInput();
+			input--;
+
+			if (0 <= input && input < animals.size())
+			{
+				chosed_anim_1 = &animals[input];
+				break;
+			}
+			else
+			{
+				cout << "chose 1 to " << animals.size() << endl;
+			}
+		}
+		cout << endl << endl << "Chose second animal? " << endl;
+
+		input = 0;
+
+
+		while (true)
+		{
+			input = CinIntInput();
+			input--;
+
+			if (0 <= input && input < animals.size())
+			{
+				chosed_anim_2 = &animals[input];
+				break;
+			}
+			else
+			{
+				cout << "chose 1 to " << animals.size() << endl;
+			}
+		}
+
+		float percente = 0.0f;
+		percente = chosed_anim_1->GeneticSimilarityPercentage(*chosed_anim_2);
+
+		system("cls");
+		cout << "the percent of genetic similarity is: " << percente << "%" << endl << endl;
+		cout << "Press enter to continue" << endl;
+		cin.get();
+		cin.get();
+	}
+	else
+	{
+		cout << "The animals count is under 2:this opration is not working " << endl << endl;
+		cout << "Press enter to continue" << endl;
+		cin.get();
+		cin.get();
+	}
+}
+void menu_functions::AnimalCompireType(const std::vector<animal>& animals) {
+
+	if (animals.size() >= 2)
+	{
+		int input;
+		const animal* chosed_anim_1 = nullptr, * chosed_anim_2 = nullptr;
+		system("cls");
+
+		AnimalPrint(animals);
+
+		cout << endl << endl << "Chose first animal " << endl;
+
+
+		while (true)
+		{
+			input = CinIntInput();
+			input--;
+
+			if (0 <= input && input < animals.size())
+			{
+				chosed_anim_1 = &animals[input];
+				break;
+			}
+			else
+			{
+				cout << "chose 1 to " << animals.size() << endl;
+			}
+		}
+		cout << endl << endl << "Chose second animal " << endl;
+
+		input = 0;
+
+
+		while (true)
+		{
+			input = CinIntInput();
+			input--;
+
+			if (0 <= input && input < animals.size())
+			{
+				chosed_anim_2 = &animals[input];
+				break;
+			}
+			else
+			{
+				cout << "chose 1 to " << animals.size() << endl;
+			}
+		}
+		system("cls");
+		if (*chosed_anim_1 == *chosed_anim_2)
+		{
+			cout << "they are of same type " << endl;
+		}
+		else
+		{
+			cout << "they are'nt of same type " << endl << endl;
+		}
+		cout << "Press enter to continue" << endl;
+		cin.get();
+		cin.get();
+	}
+	else
+	{
+		cout << "The animals count is under 2:this opration is not working " << endl << endl;
+		cout << "Press enter to continue" << endl;
+		cin.get();
+		cin.get();
+	}
+}
+void menu_functions::AnimalAsexualRepurduction(const std::vector<animal>& animals) {
+
+	if (animals.size() >= 1)
+	{
+		int input;
+		const animal* chosed_anim = nullptr;
+		system("cls");
+
+		AnimalPrint(animals);
+
+		cout << endl << endl << "Witch animal? " << endl;
+
+
+
+		while (true)
+		{
+			input = CinIntInput();
+			input--;
+
+			if (0 <= input && input < animals.size())
+			{
+				chosed_anim = &animals[input];
+				break;
+			}
+			else
+			{
+				cout << "chose 1 to " << animals.size() << endl;
+			}
+		}
+
+		animal child = chosed_anim->AsexualREpurduction();
+
+		system("cls");
+		cout << "the chromosomes of child are :" << endl << endl;
+		CellPrintChromosomes(child.GetCell());
+		cout << endl << "Press enter to continue" << endl;
+		cin.get();
+		cin.get();
+	}
+	else
+	{
+		cout << "The animals count is under 1:this opration is not working " << endl << endl;
+		cout << "Press enter to continue" << endl;
+		cin.get();
+		cin.get();
+	}
+}
+void menu_functions::AnimalSexualRepurduction(const std::vector<animal>& animals) {
+
+	if (animals.size() >= 2)
+	{
+		int input;
+		const animal* chosed_anim_1 = nullptr, * chosed_anim_2 = nullptr;
+		system("cls");
+
+		AnimalPrint(animals);
+
+		cout << endl << endl << "Choose first animal? " << endl;
+
+
+		while (true)
+		{
+			input = CinIntInput();
+			input--;
+
+			if (0 <= input && input < animals.size())
+			{
+				chosed_anim_1 = &animals[input];
+				break;
+			}
+			else
+			{
+				cout << "choose 1 to " << animals.size() << endl;
+			}
+		}
+		cout << endl << endl << "Choose second animal? " << endl;
+
+		input = 0;
+
+
+		while (true)
+		{
+			input = CinIntInput();
+			input--;
+
+			if (0 <= input && input < animals.size())
+			{
+				chosed_anim_2 = &animals[input];
+				break;
+			}
+			else
+			{
+				cout << "choose 1 to " << animals.size() << endl;
+			}
+		}
+
+		system("cls");
+		animal child = *chosed_anim_1 + *chosed_anim_2;
+		if (child.GetChromosomesCount() != 0)
+		{
+			cout << "the chromosomes of child are :" << endl << endl;
+			CellPrintChromosomes(child.GetCell());
+			cout << "Press enter to continue" << endl;
+			cin.get();
+			cin.get();
+		}
+		else
+		{
+			cout << "can not find any child for those tow animals:" << endl << endl;
+			cout << "Press enter to continue" << endl;
+			cin.get();
+			cin.get();
+		}
+	}
+	else
+	{
+		cout << "The animals count is under 2:this opration is not working " << endl << endl;
+		cout << "Press enter to continue" << endl;
+		cin.get();
+		cin.get();
+	}
+}
+void menu_functions::AnimalCellDeath(std::vector<animal>& animals) {
+
+	if (animals.size() >= 1)
+	{
+		int input;
+		animal* chosed_anim = nullptr;
+		system("cls");
+
+		AnimalPrint(animals);
+
+		cout << endl << endl << "Witch animal? " << endl;
+
+
+
+		while (true)
+		{
+			input = CinIntInput();
+			input--;
+
+			if (0 <= input && input < animals.size())
+			{
+				chosed_anim = &animals[input];
+				break;
+			}
+			else
+			{
+				cout << "chose 0 to " << animals.size() << endl;
+			}
+		}
+
+		system("cls");
+
+		bool suc = chosed_anim->Death();
+		if (suc)
+		{
+			cout << "cell dieing was succesfull" << endl;
+		}
+		else
+		{
+			cout << "cell dieing was'nt succesfull" << endl;
+		}
+		cout << "Press enter to continue" << endl;
+		cin.get();
+		cin.get();
+	}
+	else
+	{
+		cout << "The animals count is under 1:this opration is not working " << endl << endl;
+		cout << "Press enter to continue" << endl;
+		cin.get();
+		cin.get();
+	}
+}
+void menu_functions::AnimalPrint(const std::vector<animal>& animals) {
+	if (animals.size() >= 1)
+	{
+		for (int i = 0; i < animals.size(); i++)
+		{
+			cout << endl << "Animal " << i + 1 << ":" << endl << endl;
+			CellPrintChromosomes(animals[i].GetCell());
+		}
+	}
+	else
+	{
+		cout << "there is no animal to show  " << endl << endl;
+	}
+}
+void menu_functions::AnimalAdd(std::vector<animal>& animals) {
+
+	int animals_count;
+	genome gen;
+	Cell cell;
+	int input;
+	system("cls");
+	cout << "Enter the number of animals you wanna add : " << endl << endl;
+	animals_count = CinIntInput();
+	for (int i = 0; i < animals_count; i++)
+	{
+		input = 0;
+		system("cls");
+		cout << "Animal " << i + 1 << ":" << endl << endl;
+		cout << "Enter the number of chromosomes: " << endl << endl;
+		input = CinIntInput();
+		for (int i = 0; i < input; i++)
+		{
+			cout << "Chromosome " << i + 1 << ":" << endl << endl;
+			SetDNAMenu(gen);
+			cell.PushBackChromosomesV(gen);
+		}
+		animals.push_back(animal(cell));
+		cell = Cell();
+	}
+
+	cout << "Adding animals was succesfull " << endl << endl;
+
+	AnimalPrint(animals);
+	cout << "Press enter to continue" << endl;
+	cin.get();
+	cin.get();
+}
+void menu_functions::AnimalRemove(std::vector<animal>& animals) {
+
+	if (animals.size() >= 1)
+	{
+		genome gen;
+		Cell cell;
+		int input;
+
+		system("cls");
+		AnimalPrint(animals);
+		cout << "Enter intended animal index : " << endl;
+
+		while (true)
+		{
+			input = CinIntInput();
+			input--;
+
+			if (0 <= input && input < animals.size())
+			{
+
+				animals.erase(animals.begin() + input);
+
+				system("cls");
+				cout << "Removing chromosome was succesfull " << endl << endl;
+				AnimalPrint(animals);
+				break;
+			}
+			else
+			{
+				cout << "chose 1 to " << animals.size() << endl;
+			}
+		}
+
+		cout << "Press enter to continue" << endl;
+		cin.get();
+		cin.get();
+	}
+	else
+	{
+		cout << "there is no animal to remove  " << endl << endl;
+		cout << "Press enter to continue" << endl;
+		cin.get();
+		cin.get();
+	}
+}
+void menu_functions::AnimalAddChromosome(std::vector<animal>& animals) {
+
+	if (animals.size() >= 1)
+	{
+		genome gen;
+		Cell cell;
+		int input;
+
+
+		system("cls");
+		AnimalPrint(animals);
+
+		cout << "Enter intended animal index : " << endl;
+
+		while (true)
+		{
+			input = CinIntInput();
+			input--;
+
+			if (0 <= input && input < animals.size())
+			{
+				Cell* animal_cell = animals[input].GetCellPtr();
+				CellAdd(*animal_cell);
+
+				break;
+			}
+			else
+			{
+				cout << "chose 1 to " << animals.size() << endl;
+			}
+		}
+	}
+	else
+	{
+		cout << "there is no animal to edit  " << endl << endl;
+		cout << "Press enter to continue" << endl;
+		cin.get();
+		cin.get();
+	}
+}
+void menu_functions::AnimalReamoveChromosome(std::vector<animal>& animals) {
+
+	if (animals.size() >= 1)
+	{
+		genome gen;
+		Cell cell;
+		int input;
+
+
+		system("cls");
+		AnimalPrint(animals);
+		cout << "Enter intended animal index : " << endl;
+
+		while (true)
+		{
+			 input = CinIntInput();
+			input--;
+
+			if (0 <= input && input < animals.size())
+			{
+				Cell* animal_cell = animals[input].GetCellPtr();
+				CellRemove(*animal_cell);
+				break;
+			}
+			else
+			{
+				cout << "chose 1 to " << animals.size() << endl;
+			}
+		}
+	}
+	else
+	{
+		cout << "there is no animal to edit  " << endl << endl;
+		cout << "Press enter to continue" << endl;
+		cin.get();
+		cin.get();
+	}
+}
+
+int menu_functions::CinIntInput()
+{
+	string input;
+	bool isnumber = true;
+
+	while (true)
+	{
+		cin >> input;
+		isnumber = true;
+		for (int i = 0; i < input.length(); i++)
+		{
+			if (isdigit(input[i]) == false)
+			{
+				isnumber = false;
+			}
+		}
+		if (isnumber && input != "")
+		{
+			if (input.length()<4)
+			{
+				return stoi(input);
+			}
+			else
+			{
+				cout << "Too long number " << endl;
+			}
+		}
+		else if (input == "")
+		{
+			cout << "Enter somthing... " << endl;
+		}
+		else
+		{
+			cout << "Enter number... " << endl;
+		}
+	}
+}
+
